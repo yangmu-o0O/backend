@@ -13,4 +13,8 @@ public interface StaffService {
     List<Staff> index();
 
     Staff create(Staff creating);
+
+    Staff getById(Long id);
+
+    Staff update(Staff updating);
 }

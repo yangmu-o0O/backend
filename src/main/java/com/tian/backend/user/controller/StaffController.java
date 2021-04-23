@@ -4,18 +4,23 @@ import com.alibaba.fastjson.JSON;
 import com.tian.backend.user.model.Staff;
 import com.tian.backend.user.service.StaffService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * <h2>员工</h2>
+ *
  * @author muyang.tian
  * @date 2021/4/19 10:52
  */
 @Slf4j
 @RestController
 @RequestMapping("/staff")
+@Scope(WebApplicationContext.SCOPE_REQUEST)
 public class StaffController {
 
     @Resource
@@ -41,4 +46,12 @@ public class StaffController {
         return created;
     }
 
+    @PutMapping("/{id}")
+    public Staff update(@PathVariable Long id,@RequestBody Staff updating){
+        Staff staff = service.getById(id);
+        log.info("{}",JSON.toJSON(staff));
+        Staff updated = service.update(updating);
+        log.info("{}",JSON.toJSON(updated));
+        return updated;
+    }
 }
