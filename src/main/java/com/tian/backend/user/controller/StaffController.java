@@ -39,7 +39,7 @@ public class StaffController {
                             @RequestParam(required = false) String state){
         log.info("searching all staff with keywords:{}",keywords);
         Page<Staff> staffList = service.page(pageRequest,keywords,state);
-        log.info("searched all staff size:{}",staffList.getSize());
+        log.info("searched all staff size:{}",staffList.getRecords().size());
         return staffList;
     }
 
