@@ -1,6 +1,7 @@
 package com.tian.backend.user.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tian.backend.user.model.Staff;
 import com.tian.backend.user.service.StaffService;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * <h2>员工</h2>
@@ -27,14 +27,19 @@ public class StaffController {
     private StaffService service;
 
     /**
-     *
-     * @return 所有员工
+     * <h2>分页查询员工</h2>
+     * @param keywords 关键字
+     * @param state 状态
+     * @param pageRequest 分页对象
+     * @return 分页对象
      */
     @GetMapping
-    public List<Staff> index(){
-        log.info("searching all staff");
-        List<Staff> staffList = service.index();
-        log.info("searched all staff size:{}",staffList.size());
+    public Page<Staff> page(Page<Staff> pageRequest,
+                            @RequestParam(required = false) String keywords,
+                            @RequestParam(required = false) String state){
+        log.info("searching all staff with keywords:{}",keywords);
+        Page<Staff> staffList = service.page(pageRequest,keywords,state);
+        log.info("searched all staff size:{}",staffList.getSize());
         return staffList;
     }
 
@@ -48,9 +53,8 @@ public class StaffController {
 
     @PutMapping("/{id}")
     public Staff update(@PathVariable Long id,@RequestBody Staff updating){
-        Staff staff = service.getById(id);
-        log.info("{}",JSON.toJSON(staff));
-        Staff updated = service.update(updating);
+        log.info("{}",JSON.toJSON(updating));
+        Staff updated = service.update(id,updating);
         log.info("{}",JSON.toJSON(updated));
         return updated;
     }

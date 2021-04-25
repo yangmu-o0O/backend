@@ -1,20 +1,19 @@
 package com.tian.backend.user.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.tian.backend.user.model.Staff;
 
-import java.util.List;
 
 /**
  * @author muyang.tian
  * @date 2021/4/19 10:53
  */
-public interface StaffService {
-
-    List<Staff> index();
+public interface StaffService extends IService<Staff> {
 
     Staff create(Staff creating);
 
-    Staff getById(Long id);
+    Staff update(Long id,Staff updating);
 
-    Staff update(Staff updating);
+    Page<Staff> page(Page<Staff> pageRequest, String keywords, String state);
 }

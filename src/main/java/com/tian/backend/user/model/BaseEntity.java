@@ -38,11 +38,13 @@ public class BaseEntity implements Serializable,Cloneable {
 
     /**
      * 创建人
+     * TODO 暂时没做
      */
     private String createdBy;
 
     /**
-     * 更新时间
+     * 更新人
+     * TODO 暂时没做
      */
     private String updatedBy;
 
