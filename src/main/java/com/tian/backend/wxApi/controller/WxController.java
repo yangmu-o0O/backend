@@ -22,6 +22,14 @@ import java.util.List;
 @Scope(WebApplicationContext.SCOPE_REQUEST)
 public class WxController {
 
+    /**
+     * 测试微信订阅号接口
+     * @param signature 确认需要参数
+     * @param timestamp 确认需要参数
+     * @param nonce 确认需要参数
+     * @param echostr 确认需要参数
+     * @return echostr
+     */
     @GetMapping
     public String test(@RequestParam(required = false) String signature,
                        @RequestParam(required = false) String timestamp,

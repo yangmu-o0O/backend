@@ -37,25 +37,25 @@ public class StaffController {
     public Page<Staff> page(Page<Staff> pageRequest,
                             @RequestParam(required = false) String keywords,
                             @RequestParam(required = false) String state){
-        log.info("searching all staff with keywords:{}",keywords);
+        log.debug("searching all staff with keywords:{}",keywords);
         Page<Staff> staffList = service.page(pageRequest,keywords,state);
-        log.info("searched all staff size:{}",staffList.getRecords().size());
+        log.debug("searched all staff size:{}",staffList.getRecords().size());
         return staffList;
     }
 
     @PostMapping
     public Staff create(@RequestBody Staff creating){
-        log.info("creating staff with {}",JSON.toJSON(creating));
+        log.debug("creating staff with {}",JSON.toJSON(creating));
         Staff created = service.create(creating);
-        log.info("created staff with {}",JSON.toJSON(created));
+        log.debug("created staff with {}",JSON.toJSON(created));
         return created;
     }
 
     @PutMapping("/{id}")
     public Staff update(@PathVariable Long id,@RequestBody Staff updating){
-        log.info("{}",JSON.toJSON(updating));
+        log.debug("{}",JSON.toJSON(updating));
         Staff updated = service.update(id,updating);
-        log.info("{}",JSON.toJSON(updated));
+        log.debug("{}",JSON.toJSON(updated));
         return updated;
     }
 }

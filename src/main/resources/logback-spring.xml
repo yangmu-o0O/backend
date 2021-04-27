@@ -42,8 +42,16 @@
     </appender>
     <root level="info">
         <appender-ref ref="STDOUT"/>
-    </root>
-    <logger name="test" level="info" additivity="false">
         <appender-ref ref="time_file"/>
-    </logger>
+    </root>
+    <logger name="ch.qos.logback" level="ERROR"/>
+    <logger name="org" level="INFO"/>
+    <logger name="com" level="INFO"/>
+    <logger name="net" level="INFO"/>
+    <logger name="DataNucleus" level="WARN"/>
+    <logger name="org.apache" level="INFO"/>
+    <logger name="org.apache.commons.httpclient" level="ERROR"/>
+    <logger name="net.sf.oval.internal" level="ERROR"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.apache.tomcat" level="WARN"/>
 </configuration>
