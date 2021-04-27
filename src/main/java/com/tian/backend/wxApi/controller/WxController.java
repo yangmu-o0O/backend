@@ -23,19 +23,23 @@ import java.util.List;
 public class WxController {
 
     @GetMapping
-    public String test(@RequestParam String signature,
-                       @RequestParam String timestamp,
-                       @RequestParam String nonce,
-                       @RequestParam String echostr){
+    public String test(@RequestParam(required = false) String signature,
+                       @RequestParam(required = false) String timestamp,
+                       @RequestParam(required = false) String nonce,
+                       @RequestParam(required = false) String echostr){
+        log.info("开始进行微信接口验证");
         List<String> list = new ArrayList<>();
-        String token = "woxiaole";
+        String token = "goodnight";
         list.add(timestamp);
         list.add(nonce);
         list.add(token);
+        log.info("接收到的参数分别是:{}",list.toString());
         Collections.sort(list);
         if(DigestUtils.sha1Hex(list.get(0)+list.get(1)+list.get(2)).equals(signature)){
+            log.info("微信接口验证成功");
             return echostr;
         }
+        log.info("微信接口验证失败");
         return null;
 
     }
