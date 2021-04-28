@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanperiond="10 seconds" debug="false" >
     <contextName>logback-spring</contextName>
+    <!--上下文变量-->
+    <!--尼玛,在mac上用绝对路径,到liunx就要相对路径,服了 liunx 为 "log/" -->
     <property name="FILE_PATH" value="/Users/joowing/Desktop"/>
     <!-- 该appender的功能是将记录信息以特定格式写到控制台 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -21,11 +23,11 @@
         </encoder>
     </appender>
     <!-- 该appender的功能是将记录信息以特定格式写到文件 -->
-<!--    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        &lt;!&ndash; $使用变量FILE_PATH的格式,类似Linux中使用的格式：${FILE_PATH} &ndash;&gt;
+    <!-- <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+         $使用变量FILE_PATH的格式,类似Linux中使用的格式：${FILE_PATH}
         <file>${FILE_PATH}/file.log</file>
         <encoder>
-            &lt;!&ndash; 指定输出格式 &ndash;&gt;
+            指定输出格式
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0} -%msg%n</pattern>
         </encoder>
     </appender>-->
@@ -33,6 +35,7 @@
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
         <fileNamePattern>${FILE_PATH}/%d{yyyyMMdd}.log</fileNamePattern>
         <maxHistory>30</maxHistory>
+        <!--加了maxFileSize的话上面的fileNamePattern里必须添加一个%i %i是数字从零开始0123 文件大小溢出的话会生成第二个文件 -->
         <!-- maxFileSize:这是活动文件的大小，默认值是10MB-->
         <!--<maxFileSize>100MB</maxFileSize>-->
     </rollingPolicy>
