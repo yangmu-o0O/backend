@@ -1,15 +1,16 @@
 package com.tian.backend.wxApi.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.tian.backend.wxApi.model.ReplyTextMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 import org.apache.commons.codec.digest.DigestUtils;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
  * @date 2021/4/26 10:25
  */
 @Slf4j
-@RequestMapping("/wx_test")
+@RequestMapping("/wx")
 @RestController
 @Scope(WebApplicationContext.SCOPE_REQUEST)
 public class WxController {
@@ -51,6 +52,19 @@ public class WxController {
         log.info("微信接口验证失败");
         return null;
 
+    }
+
+    @PostMapping(produces = MediaType.APPLICATION_XML_VALUE)
+    public ReplyTextMessage message(@RequestBody ReplyTextMessage input){
+        log.info("接收为: {}", JSON.toJSON(input));
+        log.info("接受到来自微信用户: {} 的消息: {}",input.getFromUserName(),input.getContent());
+        ReplyTextMessage output = new ReplyTextMessage();
+        output.setFromUserName(input.getToUserName());
+        output.setToUserName(input.getFromUserName());
+        output.setContent("你是真的帅");
+        output.setCreateTime(new Date().getTime() / 1000);
+        output.setMsgType("text");
+        return output;
     }
 
 }

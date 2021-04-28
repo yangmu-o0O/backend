@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  * @date 2021/4/22 17:56
  */
 @Data
-public class BaseEntity implements Serializable,Cloneable {
+public class BaseModel implements Serializable,Cloneable {
 
     /**
      * ID

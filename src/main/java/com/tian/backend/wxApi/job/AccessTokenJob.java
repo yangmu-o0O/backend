@@ -1,7 +1,10 @@
 package com.tian.backend.wxApi.job;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.tian.backend.wxApi.config.WeixinUrl;
 import com.tian.backend.wxApi.config.WxConfig;
+import com.tian.backend.wxApi.model.AccessToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
@@ -34,11 +37,16 @@ public class AccessTokenJob {
         map.put("appid",WxConfig.appId);
         map.put("secret",WxConfig.appSecret);
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(WeixinUrl.GET_TOKEN+"?grant_type={grant_type}&appid={appid}&secret={secret}",String.class,map);
-        log.info("定时任务刷新accessToken结束 : {} 新的token为:{}", LocalDateTime.now(),responseEntity.getBody());
+        log.info("获取到的JSON为: {}",responseEntity.getBody());
+        JSONObject jsonObject = JSON.parseObject(responseEntity.getBody());
+        AccessToken accessToken = new AccessToken();
+        accessToken.setToken(jsonObject.getString("access_token"));
+        accessToken.setExpiresIn(jsonObject.getInteger("expires_in"));
+        log.info("定时任务刷新accessToken结束 : {} 新的token为:{}", LocalDateTime.now(), JSON.toJSON(accessToken));
     }
 
     /**
-     * 这里没有配置RestTemplate,就在这里手动加载一下,不然任务执行找不到暂时没太苛刻的需求,后续可能需要配置下
+     * RestTemplate,在这里手动加载一下,不然任务执行获取不到RestTemplate
      * @return RestTemplate
      */
     @Bean

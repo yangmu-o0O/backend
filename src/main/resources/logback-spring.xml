@@ -2,8 +2,8 @@
 <configuration scan="true" scanperiond="10 seconds" debug="false" >
     <contextName>logback-spring</contextName>
     <!--上下文变量-->
-    <!--尼玛,在mac上用绝对路径,到liunx就要相对路径,服了 liunx 为 "log/" -->
-    <property name="FILE_PATH" value="/Users/joowing/Desktop"/>
+    <!--尼玛,在mac上用绝对路径,到liunx就要相对路径,服了 liunx 为 "log" -->
+    <property name="FILE_PATH" value="log"/>
     <!-- 该appender的功能是将记录信息以特定格式写到控制台 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <!--encoder:将事件转换为字符串
