@@ -1,12 +1,10 @@
 package com.tian.backend.wxApi.config;
 
-import org.springframework.stereotype.Component;
 
 /**
  * @author muyang.tian
  * @date 2021/4/27 15:23
  */
-@Component
 public interface WxConfig {
 
     /**
