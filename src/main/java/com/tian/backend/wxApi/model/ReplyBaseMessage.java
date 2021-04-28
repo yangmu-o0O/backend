@@ -6,7 +6,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.Data;
 
 /**
- * <h2>返回消息实体类</h2>
+ * <h2>返回消息基础实体类</h2>
  * @author muyang.tian
  * @date 2021/4/28 10:15
  */
