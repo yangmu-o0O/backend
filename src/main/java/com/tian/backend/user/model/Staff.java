@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @TableName("staffs")
 @JsonRootName("staff")
-public class Staff extends BaseEntity {
+public class Staff extends BaseModel {
 
     /**
      * 昵称
