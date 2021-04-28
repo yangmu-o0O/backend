@@ -17,11 +17,19 @@ import java.util.List;
  * @date 2021/4/26 10:25
  */
 @Slf4j
-@RequestMapping("/wx")
+@RequestMapping("/wx_test")
 @RestController
 @Scope(WebApplicationContext.SCOPE_REQUEST)
 public class WxController {
 
+    /**
+     * 测试微信订阅号接口
+     * @param signature 确认需要参数
+     * @param timestamp 确认需要参数
+     * @param nonce 确认需要参数
+     * @param echostr 确认需要参数
+     * @return echostr
+     */
     @GetMapping
     public String test(@RequestParam(required = false) String signature,
                        @RequestParam(required = false) String timestamp,
@@ -35,6 +43,7 @@ public class WxController {
         list.add(token);
         log.info("接收到的参数分别是:{}",list.toString());
         Collections.sort(list);
+        //加密后的参数和signature进行比较,一样的话返回echostr
         if(DigestUtils.sha1Hex(list.get(0)+list.get(1)+list.get(2)).equals(signature)){
             log.info("微信接口验证成功");
             return echostr;
