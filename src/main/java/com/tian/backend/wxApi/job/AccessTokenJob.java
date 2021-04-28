@@ -25,7 +25,7 @@ public class AccessTokenJob {
     @Resource
     private RestTemplate restTemplate;
 
-    @Scheduled(cron = "0 */1 * * * ?")
+    @Scheduled(cron = "0 */30 * * * ?")
     private void getAccessToken(){
         log.info("定时任务刷新accessToken开始");
         Map<String,String> map = new HashMap<>();
