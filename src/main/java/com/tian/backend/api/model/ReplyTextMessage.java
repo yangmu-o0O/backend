@@ -1,10 +1,12 @@
-package com.tian.backend.wxApi.model;
+package com.tian.backend.api.model;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
+ * <h2>文本消息实体类</h2>
+ *
  * @author muyang.tian
  * @date 2021/4/28 14:08
  */
