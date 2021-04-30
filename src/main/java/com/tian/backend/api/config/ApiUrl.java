@@ -22,12 +22,12 @@ public interface ApiUrl {
     String GRANT_TYPE = "client_credential";
 
     /**
-     * 和风天气获取今日天气
+     * 和风天气获取当前天气
      */
     String NOW_WEATHER_URL="https://devapi.qweather.com/v7/weather/now?key={key}&location={location}&gzip=n";
 
     /**
-     *
+     * 和风天气获取三天天气
      */
     String THREE_DAY_WEATHER_URL="https://devapi.qweather.com/v7/weather/3d?key={key}&location={location}&gzip=n";
 

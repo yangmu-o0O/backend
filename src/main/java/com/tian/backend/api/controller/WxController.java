@@ -1,6 +1,5 @@
 package com.tian.backend.api.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.tian.backend.api.config.ApiConfig;
 import com.tian.backend.api.config.ApiUrl;
@@ -64,7 +63,7 @@ public class WxController {
 
     @PostMapping(produces = MediaType.APPLICATION_XML_VALUE)
     public ReplyTextMessage message(@RequestBody ReplyTextMessage input) {
-        log.info("接收为: {}", JSON.toJSON(input));
+        //log.info("接收为: {}", JSON.toJSON(input));
         log.info("接受到来自微信用户: {} 的消息: {}", input.getFromUserName(), input.getContent());
         ReplyTextMessage output = new ReplyTextMessage();
         output.setFromUserName(input.getToUserName());
@@ -76,7 +75,7 @@ public class WxController {
     }
 
     private String ReplyContent(String msg) {
-        if(msg.length()>2 && msg.substring(msg.length()-2).contains("天气")){
+        if(msg.length()>2 && msg.substring(msg.length()-2).equals("天气")){
             String address = msg.substring(0,msg.length()-2);
             Map<String,String> map = new HashMap<>();
             log.info("传入的地址为: {}",address);
@@ -84,27 +83,34 @@ public class WxController {
             map.put("ak", ApiConfig.BaiduAk);
             ResponseEntity<String> addressEntity = restTemplate.getForEntity(ApiUrl.ADDRESS_URL, String.class,map);
             JSONObject addressJson = JSONObject.parseObject(addressEntity.getBody());
+            if (addressJson.getInteger("status") != 0){
+                return "您输入的地址:["+address+"]我看不太懂呢,麻烦换下/:<L>";
+            }
             JSONObject location = addressJson.getJSONObject("result").getJSONObject("location");
             log.info("转化后的经纬度为: lat:{} lng:{}",location.get("lat"),location.get("lng"));
             map.put("key",ApiConfig.HeFengKey);
             map.put("location",location.getString("lng")+","+location.getFloat("lat"));
             ResponseEntity<JSONObject> weatherEntity = restTemplate.getForEntity(ApiUrl.THREE_DAY_WEATHER_URL, JSONObject.class,map);
+            ResponseEntity<JSONObject> nowWeatherEntity = restTemplate.getForEntity(ApiUrl.NOW_WEATHER_URL, JSONObject.class,map);
             List<JSONObject> threeDayWeather = Objects.requireNonNull(weatherEntity.getBody()).getJSONArray("daily").toJavaList(JSONObject.class);
+            JSONObject nowWeather = Objects.requireNonNull(nowWeatherEntity.getBody()).getJSONObject("now");
             JSONObject todayWeather = threeDayWeather.get(0);
+            //暂时不需要后两天的
             //JSONObject tomorrowWeather = threeDayWeather.get(1);
             //JSONObject tomorrowAfterWeather = threeDayWeather.get(2);
             StringBuilder content = new StringBuilder();
             if (todayWeather.getString("textDay").equals("晴")){
                 content.append("今天天气很晴朗🌞 冲鸭!\n");
-            }else if(todayWeather.getString("textDay").contains("小雨")){
+            }else if(todayWeather.getString("textDay").contains("雨")){
                 content.append(address).append("今天可能会下雨🌧哦,宝贝\n");
             }else if (todayWeather.getString("textDay").contains("雷")){
                 content.append(address).append("今天可能会打雷🌩呢,baby\n");
             }else {
-                content.append(address).append("今日天气: ").append(todayWeather.getString("text")).append(" 💖\n");
+                content.append(address).append("今日天气: ").append(todayWeather.getString("textDay")).append(" 💖\n");
             }
             content.append("今天温度在").append(todayWeather.getString("tempMax")).append("°到").append(todayWeather.getString("tempMin")).append("°左右\n")
-                //.append("体感温度在").append(todayWeather.getString("feelsLike")).append("°左右\n")
+                .append("当前温度在").append(nowWeather.getString("temp")).append("°\n")
+                .append("当前体感温度在").append(nowWeather.getString("feelsLike")).append("°左右\n")
                 .append("今天风向是").append(todayWeather.getString("windDirDay")).append("哦\n")
                 .append("今天的风在:").append(todayWeather.getString("windScaleDay")).append("级\n")
                 .append("☀️出现在").append(todayWeather.getString("sunrise")).append(",在").append(todayWeather.getString("sunset")).append("落下\n")
