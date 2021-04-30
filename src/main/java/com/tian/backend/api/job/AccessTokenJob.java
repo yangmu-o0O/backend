@@ -1,10 +1,10 @@
-package com.tian.backend.wxApi.job;
+package com.tian.backend.api.job;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.tian.backend.wxApi.config.WeixinUrl;
-import com.tian.backend.wxApi.config.WxConfig;
-import com.tian.backend.wxApi.model.AccessToken;
+import com.tian.backend.api.config.ApiUrl;
+import com.tian.backend.api.config.ApiConfig;
+import com.tian.backend.api.model.AccessToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
@@ -33,10 +33,10 @@ public class AccessTokenJob {
     private void getAccessToken(){
         log.info("定时任务刷新accessToken开始 : {}", LocalDateTime.now());
         Map<String,String> map = new HashMap<>();
-        map.put("grant_type",WeixinUrl.GRANT_TYPE);
-        map.put("appid",WxConfig.appId);
-        map.put("secret",WxConfig.appSecret);
-        ResponseEntity<String> responseEntity = restTemplate.getForEntity(WeixinUrl.GET_TOKEN+"?grant_type={grant_type}&appid={appid}&secret={secret}",String.class,map);
+        map.put("grant_type",ApiUrl.GRANT_TYPE);
+        map.put("appid", ApiConfig.wxAppId);
+        map.put("secret", ApiConfig.wxAppSecret);
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity(ApiUrl.GET_TOKEN_URL+"?grant_type={grant_type}&appid={appid}&secret={secret}",String.class,map);
         log.info("获取到的JSON为: {}",responseEntity.getBody());
         JSONObject jsonObject = JSON.parseObject(responseEntity.getBody());
         AccessToken accessToken = new AccessToken();

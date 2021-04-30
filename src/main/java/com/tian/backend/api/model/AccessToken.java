@@ -1,4 +1,4 @@
-package com.tian.backend.wxApi.model;
+package com.tian.backend.api.model;
 
 import lombok.Data;
 
