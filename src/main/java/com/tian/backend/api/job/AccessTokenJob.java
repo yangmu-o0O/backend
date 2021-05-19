@@ -25,6 +25,7 @@ import java.util.Map;
 @Component
 public class AccessTokenJob {
 
+    private AccessToken accessToken;
     @Resource
     private RestTemplate restTemplate;
 
@@ -39,9 +40,7 @@ public class AccessTokenJob {
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(ApiUrl.GET_TOKEN_URL+"?grant_type={grant_type}&appid={appid}&secret={secret}",String.class,map);
         log.info("获取到的JSON为: {}",responseEntity.getBody());
         JSONObject jsonObject = JSON.parseObject(responseEntity.getBody());
-        AccessToken accessToken = new AccessToken();
-        accessToken.setToken(jsonObject.getString("access_token"));
-        accessToken.setExpiresIn(jsonObject.getInteger("expires_in"));
+        accessToken = new AccessToken(jsonObject.getString("access_token"),jsonObject.getInteger("expires_in"));
         log.info("定时任务刷新accessToken结束 : {} 新的token为:{}", LocalDateTime.now(), JSON.toJSON(accessToken));
     }
 
@@ -52,5 +51,10 @@ public class AccessTokenJob {
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
+    }
+
+    @Bean
+    public AccessToken accessToken() {
+        return accessToken;
     }
 }

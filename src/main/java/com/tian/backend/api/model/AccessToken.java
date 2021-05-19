@@ -1,5 +1,6 @@
 package com.tian.backend.api.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Data;
  * @date 2021/4/28 10:15
  */
 @Data
+@AllArgsConstructor
 public class AccessToken {
 
     /**
