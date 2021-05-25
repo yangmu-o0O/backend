@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -67,16 +68,8 @@ public class StaffController {
         log.debug("{}",JSON.toJSON(updated));
         return updated;
     }
-    @GetMapping("/sent_message")
-    public void aa(){
-        String messageId = String.valueOf(UUID.randomUUID());
-        String messageData = "test message, hello!";
-        String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        Map<String,Object> map=new HashMap<>();
-        map.put("messageId",messageId);
-        map.put("messageData",messageData);
-        map.put("createTime",createTime);
-        //将消息携带绑定键值：TestDirectRouting 发送到交换机TestDirectExchange
-        template.convertAndSend("testDirectExchange", "testDirectRouting", map);
+    @GetMapping("/export")
+    public void export(HttpServletResponse response){
+        service.exportStaff(response);
     }
 }

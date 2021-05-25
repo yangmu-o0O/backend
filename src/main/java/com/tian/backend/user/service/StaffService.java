@@ -1,8 +1,12 @@
 package com.tian.backend.user.service;
 
+import cn.hutool.http.HttpResponse;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.tian.backend.user.model.Staff;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 
 /**
@@ -16,4 +20,6 @@ public interface StaffService extends IService<Staff> {
     Staff update(Long id,Staff updating);
 
     Page<Staff> page(Page<Staff> pageRequest, String keywords, String state);
+
+    void exportStaff(HttpServletResponse response);
 }
