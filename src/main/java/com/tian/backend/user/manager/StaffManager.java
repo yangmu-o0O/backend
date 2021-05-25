@@ -1,17 +1,26 @@
 package com.tian.backend.user.manager;
 
+import cn.hutool.http.HttpResponse;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.tian.backend.common.util.ExcelUtils;
 import com.tian.backend.user.common.CommonEnum;
 import com.tian.backend.user.model.Staff;
 import com.tian.backend.user.repository.StaffRepository;
 import com.tian.backend.user.service.StaffService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * @author muyang.tian
@@ -24,6 +33,26 @@ public class StaffManager extends ServiceImpl<StaffRepository,Staff> implements 
     @Override
     public Page<Staff> page(Page<Staff> pageRequest, String keywords, String state) {
         return baseMapper.page(pageRequest,keywords,state);
+    }
+
+    @Override
+    public void exportStaff(HttpServletResponse response){
+        List<Staff> list = baseMapper.selectList(null);
+        String[] headerName = {"昵称","登录名","工号","生日","状态"};
+        String[] headerKey = {"nickName","loginName","no","birthday","state"};
+        String name = "全部员工";
+        HSSFWorkbook workbook = ExcelUtils.exportExcel(name,headerName,headerKey,list);
+        try {
+            response.setHeader("Content-disposition",
+                    "attachment;filename=" + new String(name.getBytes("gb2312"), StandardCharsets.ISO_8859_1) + ".xls");
+            OutputStream outputStream = response.getOutputStream();
+            outputStream.flush();
+            workbook.write(outputStream);
+            outputStream.close();
+        } catch (IOException e) {
+            log.error("导出异常!!!");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -46,4 +75,5 @@ public class StaffManager extends ServiceImpl<StaffRepository,Staff> implements 
         baseMapper.updateById(updating);
         return baseMapper.selectOne(new LambdaQueryWrapper<Staff>().eq(Staff::getId,id));
     }
+
 }

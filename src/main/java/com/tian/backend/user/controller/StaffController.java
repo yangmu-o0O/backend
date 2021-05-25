@@ -5,11 +5,18 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tian.backend.user.model.Staff;
 import com.tian.backend.user.service.StaffService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * <h2>员工</h2>
@@ -25,6 +32,9 @@ public class StaffController {
 
     @Resource
     private StaffService service;
+
+    @Resource
+    private RabbitTemplate template;
 
     /**
      * <h2>分页查询员工</h2>
@@ -57,5 +67,9 @@ public class StaffController {
         Staff updated = service.update(id,updating);
         log.debug("{}",JSON.toJSON(updated));
         return updated;
+    }
+    @GetMapping("/export")
+    public void export(HttpServletResponse response){
+        service.exportStaff(response);
     }
 }
