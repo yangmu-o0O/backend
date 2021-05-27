@@ -1,6 +1,5 @@
 package com.tian.backend.user.manager;
 
-import cn.hutool.http.HttpResponse;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
