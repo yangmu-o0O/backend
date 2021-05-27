@@ -7,10 +7,8 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * EXCEL工具类
@@ -31,9 +29,11 @@ public class ExcelUtils {
     public static HSSFWorkbook exportExcel(String sheetName, String[] headerName, String[] headerKey, List<?> dataList) {
         HSSFWorkbook wb = new HSSFWorkbook();
         assert headerKey != null;
+        if (dataList.isEmpty()){
+            throw new RuntimeException("无数据导出!");
+        }
         //Excel名字
-        HSSFSheet sheet;
-        sheet = "".equals(sheetName) ? wb.createSheet("sheet1") : wb.createSheet(sheetName);
+        HSSFSheet sheet = "".equals(sheetName) ? wb.createSheet("sheet1") : wb.createSheet(sheetName);
         //靠左放置
         HSSFCellStyle headerStyle = wb.createCellStyle();
         headerStyle.setAlignment(HorizontalAlignment.LEFT);
@@ -42,7 +42,7 @@ public class ExcelUtils {
         //是否加粗
         font.setBold(true);
         //字体大小
-        font.setFontHeightInPoints((short) 12);
+        font.setFontHeightInPoints((short) 14);
         headerStyle.setFont(font);
         //填充列名
         HSSFRow headerRow = sheet.createRow(0);
@@ -57,23 +57,16 @@ public class ExcelUtils {
         //文本格式
         HSSFCellStyle contextStyle = wb.createCellStyle();
         contextStyle.setDataFormat(wb.createDataFormat().getFormat("text"));
-        List<String> keyList = Arrays.asList(headerKey);
-        //插入数值
-        int n = 0;
+        List<Field> fields = Arrays.asList(dataList.get(0).getClass().getDeclaredFields());
+        //把headerKey和变量对应一下
+        Map<String, Field> fieldMap = fields.stream().filter(field -> Arrays.asList(headerKey).contains(field.getName()))
+                .collect(Collectors.toMap(Field::getName, field -> field));
         for (Object a : dataList) {
-            List<Field> fields = Arrays.asList(a.getClass().getDeclaredFields());
-            //转化成对应的map
-            Map<String, Field> map = new HashMap<>();
-            fields.forEach(field -> {
-                if (keyList.contains(field.getName())) {
-                    map.put(headerKey[keyList.indexOf(field.getName())], field);
-                }
-            });
-            HSSFRow dataRow = sheet.createRow(n += 1);
+            HSSFRow dataRow = sheet.createRow(dataList.indexOf(a)+1);
             //按照headerKey的顺序插值,后面根据key插入data中对应的值
             for (int j = 0; j < headerKey.length; j++) {
                 HSSFCell cell = dataRow.createCell(j);
-                Field field = map.get(headerKey[j]);
+                Field field = fieldMap.get(headerKey[j]);
                 field.setAccessible(true);
                 try {
                     if (field.get(a) == null || "".equals(field.get(a))) {
