@@ -16,9 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -41,17 +38,7 @@ public class StaffManager extends ServiceImpl<StaffRepository,Staff> implements 
         String[] headerKey = {"nickName","loginName","no","birthday","state"};
         String name = "全部员工";
         HSSFWorkbook workbook = ExcelUtils.exportExcel(name,headerName,headerKey,list);
-        try {
-            response.setHeader("Content-disposition",
-                    "attachment;filename=" + new String(name.getBytes("gb2312"), StandardCharsets.ISO_8859_1) + ".xls");
-            OutputStream outputStream = response.getOutputStream();
-            outputStream.flush();
-            workbook.write(outputStream);
-            outputStream.close();
-        } catch (IOException e) {
-            log.error("导出异常!!!");
-            e.printStackTrace();
-        }
+        ExcelUtils.exportBrowser(workbook,response,name);
     }
 
     @Override

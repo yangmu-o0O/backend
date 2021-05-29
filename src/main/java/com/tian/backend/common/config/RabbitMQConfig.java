@@ -29,11 +29,4 @@ public class RabbitMQConfig {
     Binding bindingDirect() {
         return BindingBuilder.bind(TestDirectQueue()).to(TestDirectExchange()).with("testDirectRouting");
     }
-
-
-
-    @Bean
-    DirectExchange lonelyDirectExchange() {
-        return new DirectExchange("lonelyDirectExchange");
-    }
 }
