@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 /**
  * <h2>员工实体类</h2>
  *
- * @Author muyang.tian
- * @Date 2021/4/16 17:32
+ * @author muyang.tian
+ * @date 2021/4/16 17:32
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

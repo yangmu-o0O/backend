@@ -13,8 +13,8 @@ public interface CommonEnum {
         WORK("work","在职"),
         REGION("region","离职");
 
-        private String value;
-        private String name;
+        String value;
+        String name;
 
         StaffState(String value, String name) {
             this.value = value;
