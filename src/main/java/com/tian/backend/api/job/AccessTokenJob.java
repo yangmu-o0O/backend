@@ -40,8 +40,8 @@ public class AccessTokenJob {
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(ApiUrl.GET_TOKEN_URL+"?grant_type={grant_type}&appid={appid}&secret={secret}",String.class,map);
         log.info("获取到的JSON为: {}",responseEntity.getBody());
         JSONObject jsonObject = JSON.parseObject(responseEntity.getBody());
-        accessToken = new AccessToken(jsonObject.getString("access_token"),jsonObject.getInteger("expires_in"));
-        log.info("定时任务刷新accessToken结束 : {} 新的token为:{}", LocalDateTime.now(), JSON.toJSON(accessToken));
+        accessToken = new AccessToken(jsonObject.getString("access_token"),jsonObject.getInteger("expiresIn"));
+        log.info("定时任务刷新accessToken结束 : {} 新的token为:{}", LocalDateTime.now(), JSON.toJSON(accessToken.getToken()));
     }
 
     /**
