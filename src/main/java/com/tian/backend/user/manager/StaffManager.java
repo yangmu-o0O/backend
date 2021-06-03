@@ -1,9 +1,11 @@
 package com.tian.backend.user.manager;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.code.kaptcha.Producer;
 import com.tian.backend.common.util.ExcelUtils;
 import com.tian.backend.user.common.CommonEnum;
 import com.tian.backend.user.model.Staff;
@@ -12,11 +14,17 @@ import com.tian.backend.user.service.StaffService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author muyang.tian
@@ -24,7 +32,21 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class StaffManager extends ServiceImpl<StaffRepository,Staff> implements StaffService {
+public class StaffManager extends ServiceImpl<StaffRepository,Staff> implements StaffService , InitializingBean {
+
+    @Resource
+    private Producer producer;
+    @Resource
+    private RedisTemplate<Object,Object> redisTemplate;
+
+    @Override
+    public void afterPropertiesSet(){
+        FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
+        redisTemplate.setValueSerializer(fastJsonRedisSerializer);
+        redisTemplate.setHashValueSerializer(fastJsonRedisSerializer);
+        redisTemplate.setKeySerializer(StringRedisSerializer.UTF_8);
+        redisTemplate.setHashKeySerializer(StringRedisSerializer.UTF_8);
+    }
 
     @Override
     public Page<Staff> page(Page<Staff> pageRequest, String keywords, String state) {
@@ -39,6 +61,13 @@ public class StaffManager extends ServiceImpl<StaffRepository,Staff> implements 
         String name = "全部员工";
         HSSFWorkbook workbook = ExcelUtils.exportExcel(name,headerName,headerKey,list);
         ExcelUtils.exportBrowser(workbook,response,name);
+    }
+
+    @Override
+    public BufferedImage createCaptcha(String uuid) {
+        String code = producer.createText();
+        redisTemplate.opsForValue().set(uuid, code, 1, TimeUnit.MINUTES);
+        return producer.createImage(code);
     }
 
     @Override

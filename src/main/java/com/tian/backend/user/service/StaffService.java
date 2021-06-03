@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.tian.backend.user.model.Staff;
 
 import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 
 
 /**
@@ -20,4 +21,6 @@ public interface StaffService extends IService<Staff> {
     Page<Staff> page(Page<Staff> pageRequest, String keywords, String state);
 
     void exportStaff(HttpServletResponse response);
+
+    BufferedImage createCaptcha(String uuid);
 }

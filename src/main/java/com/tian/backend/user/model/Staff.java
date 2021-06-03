@@ -3,6 +3,7 @@ package com.tian.backend.user.model;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
  * @date 2021/4/16 17:32
  */
 @Data
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @TableName("staffs")
 @JsonRootName("staff")
