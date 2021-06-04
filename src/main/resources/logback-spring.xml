@@ -2,7 +2,6 @@
 <configuration scan="true" scanperiond="10 seconds" debug="false" >
     <contextName>logback-spring</contextName>
     <!--上下文变量-->
-    <!--尼玛,在mac上用绝对路径,到liunx就要相对路径,服了 liunx 为 "log" -->
     <property name="FILE_PATH" value="log"/>
     <!-- 该appender的功能是将记录信息以特定格式写到控制台 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -51,10 +50,8 @@
     <logger name="org" level="INFO"/>
     <logger name="com" level="INFO"/>
     <logger name="net" level="INFO"/>
-    <logger name="DataNucleus" level="WARN"/>
     <logger name="org.apache" level="INFO"/>
     <logger name="org.apache.commons.httpclient" level="ERROR"/>
-    <logger name="net.sf.oval.internal" level="ERROR"/>
     <logger name="org.springframework" level="WARN"/>
     <logger name="org.apache.tomcat" level="WARN"/>
 </configuration>

@@ -32,15 +32,15 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Service
-public class StaffManager extends ServiceImpl<StaffRepository,Staff> implements StaffService , InitializingBean {
+public class StaffManager extends ServiceImpl<StaffRepository, Staff> implements StaffService, InitializingBean {
 
     @Resource
     private Producer producer;
     @Resource
-    private RedisTemplate<Object,Object> redisTemplate;
+    private RedisTemplate<Object, Object> redisTemplate;
 
     @Override
-    public void afterPropertiesSet(){
+    public void afterPropertiesSet() {
         FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
         redisTemplate.setValueSerializer(fastJsonRedisSerializer);
         redisTemplate.setHashValueSerializer(fastJsonRedisSerializer);
@@ -50,17 +50,17 @@ public class StaffManager extends ServiceImpl<StaffRepository,Staff> implements 
 
     @Override
     public Page<Staff> page(Page<Staff> pageRequest, String keywords, String state) {
-        return baseMapper.page(pageRequest,keywords,state);
+        return baseMapper.page(pageRequest, keywords, state);
     }
 
     @Override
-    public void exportStaff(HttpServletResponse response){
+    public void exportStaff(HttpServletResponse response) {
         List<Staff> list = baseMapper.selectList(null);
-        String[] headerName = {"昵称","登录名","工号","生日","状态"};
-        String[] headerKey = {"nickName","loginName","no","birthday","state"};
+        String[] headerName = {"昵称", "登录名", "工号", "生日", "状态"};
+        String[] headerKey = {"nickName", "loginName", "no", "birthday", "state"};
         String name = "全部员工";
-        HSSFWorkbook workbook = ExcelUtils.exportExcel(name,headerName,headerKey,list);
-        ExcelUtils.exportBrowser(workbook,response,name);
+        HSSFWorkbook workbook = ExcelUtils.exportExcel(name, headerName, headerKey, list);
+        ExcelUtils.exportBrowser(workbook, response, name);
     }
 
     @Override
@@ -73,22 +73,22 @@ public class StaffManager extends ServiceImpl<StaffRepository,Staff> implements 
     @Override
     public Staff create(Staff creating) {
         log.info("创建员工信息 : {}", JSON.toJSON(creating));
-        Staff exist = baseMapper.selectOne(new LambdaQueryWrapper<Staff>().eq(Staff::getNo,creating.getNo()));
-        if (exist != null){
+        Staff exist = baseMapper.selectOne(new LambdaQueryWrapper<Staff>().eq(Staff::getNo, creating.getNo()));
+        if (exist != null) {
             throw new RestClientException("工号已存在");
         }
         creating.setState(CommonEnum.StaffState.WORK.getValue());
         creating.setPassword(DigestUtils.md5Hex(creating.getPassword()));
         baseMapper.insert(creating);
-        return baseMapper.selectOne(new LambdaQueryWrapper<Staff>().eq(Staff::getLoginName,creating.getLoginName()));
+        return baseMapper.selectOne(new LambdaQueryWrapper<Staff>().eq(Staff::getLoginName, creating.getLoginName()));
     }
 
     @Override
-    public Staff update(Long id,Staff updating) {
+    public Staff update(Long id, Staff updating) {
         log.info("更新员工信息 : {}", JSON.toJSON(updating));
         updating.setPassword(DigestUtils.md5Hex(updating.getPassword()));
         baseMapper.updateById(updating);
-        return baseMapper.selectOne(new LambdaQueryWrapper<Staff>().eq(Staff::getId,id));
+        return baseMapper.selectOne(new LambdaQueryWrapper<Staff>().eq(Staff::getId, id));
     }
 
 }

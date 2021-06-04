@@ -16,7 +16,7 @@ public interface StaffService extends IService<Staff> {
 
     Staff create(Staff creating);
 
-    Staff update(Long id,Staff updating);
+    Staff update(Long id, Staff updating);
 
     Page<Staff> page(Page<Staff> pageRequest, String keywords, String state);
 

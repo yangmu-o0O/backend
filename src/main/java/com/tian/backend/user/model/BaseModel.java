@@ -12,11 +12,12 @@ import java.time.LocalDateTime;
 /**
  * <h2>所有模型的基类</h2>
  * todo 可以拆分成三个,但我不想
+ *
  * @author muyang.tian
  * @date 2021/4/22 17:56
  */
 @Data
-public class BaseModel implements Serializable,Cloneable {
+public class BaseModel implements Serializable, Cloneable {
 
     /**
      * ID
@@ -49,7 +50,7 @@ public class BaseModel implements Serializable,Cloneable {
     private String updatedBy;
 
     @Override
-    public Object clone()  {
+    public Object clone() {
         try {
             return super.clone();
         } catch (CloneNotSupportedException e) {

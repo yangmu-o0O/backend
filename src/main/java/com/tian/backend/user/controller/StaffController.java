@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
+
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -32,61 +33,64 @@ public class StaffController {
 
     /**
      * <h2>分页查询员工</h2>
-     * @param keywords 关键字
-     * @param state 状态
+     *
+     * @param keywords    关键字
+     * @param state       状态
      * @param pageRequest 分页对象
      * @return 分页对象
      */
     @GetMapping
     public Page<Staff> page(Page<Staff> pageRequest,
                             @RequestParam(required = false) String keywords,
-                            @RequestParam(required = false) String state){
-        log.debug("searching all staff with keywords:{}",keywords);
-        Page<Staff> staffList = service.page(pageRequest,keywords,state);
-        log.debug("searched all staff size:{}",staffList.getRecords().size());
+                            @RequestParam(required = false) String state) {
+        log.debug("searching all staff with keywords:{}", keywords);
+        Page<Staff> staffList = service.page(pageRequest, keywords, state);
+        log.debug("searched all staff size:{}", staffList.getRecords().size());
         return staffList;
     }
 
     @PostMapping
-    public Staff create(@RequestBody Staff creating){
-        log.debug("creating staff with {}",JSON.toJSON(creating));
+    public Staff create(@RequestBody Staff creating) {
+        log.debug("creating staff with {}", JSON.toJSON(creating));
         Staff created = service.create(creating);
-        log.debug("created staff with {}",JSON.toJSON(created));
+        log.debug("created staff with {}", JSON.toJSON(created));
         return created;
     }
 
     @PutMapping("/{id}")
-    public Staff update(@PathVariable Long id,@RequestBody Staff updating){
-        log.debug("{}",JSON.toJSON(updating));
-        Staff updated = service.update(id,updating);
-        log.debug("{}",JSON.toJSON(updated));
+    public Staff update(@PathVariable Long id, @RequestBody Staff updating) {
+        log.debug("{}", JSON.toJSON(updating));
+        Staff updated = service.update(id, updating);
+        log.debug("{}", JSON.toJSON(updated));
         return updated;
     }
 
     /**
      * <h2>导出员工信息</h2>
+     *
      * @param response 返回表格响应
      */
     @GetMapping("/export")
-    public void export(HttpServletResponse response){
+    public void export(HttpServletResponse response) {
         service.exportStaff(response);
     }
 
     /**
      * <h2>获取图片验证码</h2>
+     *
      * @param response 返回图片响应
-     * @param uuid 用于存放验证码的RedisKey
+     * @param uuid     用于存放验证码的RedisKey
      */
     @GetMapping("/captcha.jpg")
     public void imageCaptcha(HttpServletResponse response,
-                             @RequestParam("uuid")String uuid) throws IOException{
+                             @RequestParam("uuid") String uuid) throws IOException {
         log.info("获取图片验证码");
         response.setHeader("Cache-Control", "no-store, no-cache");
         response.setContentType("image/jpeg");
         //获取图片验证码
         BufferedImage image = service.createCaptcha(uuid);
         //jdk1.7语法糖try-with-resource 自动关闭连接
-        try(ServletOutputStream out = response.getOutputStream()){
+        try (ServletOutputStream out = response.getOutputStream()) {
             ImageIO.write(image, "jpg", out);
         }
     }

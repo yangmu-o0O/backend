@@ -9,9 +9,9 @@ public interface CommonEnum {
     /**
      * 员工状态
      */
-    enum StaffState{
-        WORK("work","在职"),
-        REGION("region","离职");
+    enum StaffState {
+        WORK("work", "在职"),
+        REGION("region", "离职");
 
         String value;
         String name;

@@ -7,6 +7,7 @@ import lombok.Data;
 
 /**
  * <h2>返回消息基础实体类</h2>
+ *
  * @author muyang.tian
  * @date 2021/4/28 10:15
  */

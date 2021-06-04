@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ReplyTextMessage extends ReplyBaseMessage{
+public class ReplyTextMessage extends ReplyBaseMessage {
 
     @JacksonXmlProperty(localName = "Content")
     private String Content;

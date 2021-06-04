@@ -31,21 +31,22 @@ public class AccessTokenJob {
 
     //每30分钟执行一次 cron表达式
     @Scheduled(cron = "0 */30 * * * ?")
-    private void getAccessToken(){
+    private void getAccessToken() {
         log.info("定时任务刷新accessToken开始 : {}", LocalDateTime.now());
-        Map<String,String> map = new HashMap<>();
-        map.put("grant_type",ApiUrl.GRANT_TYPE);
+        Map<String, String> map = new HashMap<>();
+        map.put("grant_type", ApiUrl.GRANT_TYPE);
         map.put("appid", ApiConfig.wxAppId);
         map.put("secret", ApiConfig.wxAppSecret);
-        ResponseEntity<String> responseEntity = restTemplate.getForEntity(ApiUrl.GET_TOKEN_URL+"?grant_type={grant_type}&appid={appid}&secret={secret}",String.class,map);
-        log.info("获取到的JSON为: {}",responseEntity.getBody());
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity(ApiUrl.GET_TOKEN_URL + "?grant_type={grant_type}&appid={appid}&secret={secret}", String.class, map);
+        log.info("获取到的JSON为: {}", responseEntity.getBody());
         JSONObject jsonObject = JSON.parseObject(responseEntity.getBody());
-        accessToken = new AccessToken(jsonObject.getString("access_token"),jsonObject.getInteger("expiresIn"));
+        accessToken = new AccessToken(jsonObject.getString("access_token"), jsonObject.getInteger("expiresIn"));
         log.info("定时任务刷新accessToken结束 : {} 新的token为:{}", LocalDateTime.now(), JSON.toJSON(accessToken.getToken()));
     }
 
     /**
      * RestTemplate,在这里手动加载一下,不然任务执行获取不到RestTemplate
+     *
      * @return RestTemplate
      */
     @Bean
