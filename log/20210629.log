@@ -1,0 +1,75 @@
+00:00:00.071 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60d9f200-7c8f45c9-0f11c9b9"}
+00:00:00.074 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T00:00:00.074 新的token为:null
+00:29:59.996 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T00:29:59.996
+00:30:00.081 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60d9f908-131ac1f3-38e1062f"}
+00:30:00.081 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T00:30:00.081 新的token为:null
+00:59:59.995 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T00:59:59.995
+01:00:00.118 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da0010-59ff7260-74e54dda"}
+01:00:00.118 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T01:00:00.118 新的token为:null
+01:30:00.000 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T01:30
+01:30:00.103 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da0718-11a6453b-62f076f7"}
+01:30:00.103 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T01:30:00.103 新的token为:null
+01:59:59.995 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T01:59:59.995
+02:00:00.115 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da0e20-52b40c5c-300c2783"}
+02:00:00.115 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T02:00:00.115 新的token为:null
+02:29:59.994 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T02:29:59.994
+02:30:00.117 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da1528-4a53d0b2-740f7fd4"}
+02:30:00.117 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T02:30:00.117 新的token为:null
+02:59:59.993 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T02:59:59.993
+03:00:00.124 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da1c30-6cfa54a8-336c0867"}
+03:00:00.124 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T03:00:00.124 新的token为:null
+03:30:00.000 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T03:30
+03:30:00.116 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da2338-4ff6bc2a-1cf204c7"}
+03:30:00.116 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T03:30:00.116 新的token为:null
+03:59:59.994 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T03:59:59.994
+04:00:00.125 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da2a40-23402e7f-11ba1a99"}
+04:00:00.126 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T04:00:00.126 新的token为:null
+04:29:59.994 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T04:29:59.994
+04:30:00.114 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da3148-3ce82014-5bd4620e"}
+04:30:00.114 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T04:30:00.114 新的token为:null
+05:00:00.002 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T05:00:00.002
+05:00:00.195 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da3850-09aa62f2-5ae21b74"}
+05:00:00.195 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T05:00:00.195 新的token为:null
+05:30:00.000 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T05:30
+05:30:00.131 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da3f58-0ae7c431-7220428a"}
+05:30:00.132 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T05:30:00.132 新的token为:null
+05:59:59.999 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T05:59:59.999
+06:00:00.121 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da4660-24f88007-6fdc4113"}
+06:00:00.121 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T06:00:00.121 新的token为:null
+06:29:59.993 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T06:29:59.993
+06:30:00.068 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da4d68-3ba9bf8c-34b10ff5"}
+06:30:00.068 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T06:30:00.068 新的token为:null
+06:59:59.996 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T06:59:59.996
+07:00:00.072 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da5470-3bd55f0e-2fa1ff76"}
+07:00:00.072 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T07:00:00.072 新的token为:null
+07:30:00.001 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T07:30:00.001
+07:30:00.073 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da5b78-0e9dcb8a-731e0a13"}
+07:30:00.073 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T07:30:00.073 新的token为:null
+07:59:59.993 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T07:59:59.993
+08:00:00.120 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da6280-68596bda-4d7cc532"}
+08:00:00.120 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T08:00:00.120 新的token为:null
+08:29:59.996 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T08:29:59.996
+08:30:00.127 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da6988-70745d29-7f877505"}
+08:30:00.127 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T08:30:00.127 新的token为:null
+08:59:59.998 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T08:59:59.998
+09:00:00.089 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da7090-6f852b76-1eae8b6a"}
+09:00:00.089 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T09:00:00.089 新的token为:null
+09:30:00.001 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken开始 : 2021-06-29T09:30:00.001
+09:30:00.088 [scheduling-1] INFO  AccessTokenJob -获取到的JSON为: {"errcode":40164,"errmsg":"invalid ip 116.236.17.59 ipv6 ::ffff:116.236.17.59, not in whitelist rid: 60da7798-6e3ef80b-216f9627"}
+09:30:00.088 [scheduling-1] INFO  AccessTokenJob -定时任务刷新accessToken结束 : 2021-06-29T09:30:00.088 新的token为:null
+09:43:55.127 [SpringContextShutdownHook] INFO  HikariDataSource -HikariPool-1 - Shutdown initiated...
+09:43:55.131 [SpringContextShutdownHook] INFO  HikariDataSource -HikariPool-1 - Shutdown completed.
+09:44:41.837 [main] INFO  BackendApplication -Starting BackendApplication using Java 1.8.0_251 on joowingdeiMac-2.local with PID 35336 (/Users/joowing/Documents/project/backend/target/classes started by joowing in /Users/joowing/Documents/project/backend)
+09:44:41.839 [main] INFO  BackendApplication -No active profile set, falling back to default profiles: default
+09:44:42.823 [main] INFO  Http11NioProtocol -Initializing ProtocolHandler ["http-nio-80"]
+09:44:42.824 [main] INFO  StandardService -Starting service [Tomcat]
+09:44:42.824 [main] INFO  StandardEngine -Starting Servlet engine: [Apache Tomcat/9.0.44]
+09:44:42.877 [main] INFO  [/] -Initializing Spring embedded WebApplicationContext
+09:44:44.030 [main] INFO  Http11NioProtocol -Starting ProtocolHandler ["http-nio-80"]
+09:44:44.062 [main] INFO  BackendApplication -Started BackendApplication in 2.649 seconds (JVM running for 3.167)
+09:45:11.837 [http-nio-80-exec-1] INFO  [/] -Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:45:11.906 [http-nio-80-exec-1] INFO  HikariDataSource -HikariPool-1 - Starting...
+09:45:12.195 [http-nio-80-exec-1] INFO  HikariDataSource -HikariPool-1 - Start completed.
+09:47:28.040 [HikariPool-1 housekeeper] WARN  HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m12s818ms).
+09:47:28.124 [SpringContextShutdownHook] INFO  HikariDataSource -HikariPool-1 - Shutdown initiated...
+09:47:28.129 [SpringContextShutdownHook] INFO  HikariDataSource -HikariPool-1 - Shutdown completed.

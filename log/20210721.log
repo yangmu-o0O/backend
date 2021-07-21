@@ -1,0 +1,3 @@
+14:42:28.510 [main] INFO  TestBackendApplicationTests -Starting TestBackendApplicationTests using Java 1.8.0_251 on joowingdeiMac-2.local with PID 69721 (started by joowing in /Users/joowing/Documents/project/backend)
+14:42:28.514 [main] INFO  TestBackendApplicationTests -No active profile set, falling back to default profiles: default
+14:42:32.438 [main] INFO  TestBackendApplicationTests -Started TestBackendApplicationTests in 4.383 seconds (JVM running for 5.309)

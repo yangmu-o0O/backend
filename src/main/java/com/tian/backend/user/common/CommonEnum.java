@@ -10,7 +10,13 @@ public interface CommonEnum {
      * 员工状态
      */
     enum StaffState{
+        /**
+         * 在职
+         */
         WORK("work","在职"),
+        /**
+         * 离职
+         */
         REGION("region","离职");
 
         String value;

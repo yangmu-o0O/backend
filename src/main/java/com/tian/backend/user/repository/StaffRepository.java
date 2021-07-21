@@ -13,7 +13,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StaffRepository extends BaseMapper<Staff> {
 
-
+    /**
+     * <h2></h2>
+     *
+     * @param pageRequest a
+     * @param keywords    a
+     * @param state       a
+     * @return a
+     */
     Page<Staff> page(Page<Staff> pageRequest, String keywords, String state);
 
+    void updateName(String name, String no);
 }

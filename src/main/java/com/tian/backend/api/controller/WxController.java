@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -63,27 +64,29 @@ public class WxController {
 
     @PostMapping(produces = MediaType.APPLICATION_XML_VALUE)
     public ReplyTextMessage message(@RequestBody ReplyTextMessage input) {
-        //log.info("接收为: {}", JSON.toJSON(input));
         log.info("接受到来自微信用户: {} 的消息: {}", input.getFromUserName(), input.getContent());
         ReplyTextMessage output = new ReplyTextMessage();
         output.setFromUserName(input.getToUserName());
         output.setToUserName(input.getFromUserName());
-        output.setContent(ReplyContent(input.getContent()));
-        output.setCreateTime(new Date().getTime() / 1000);
+        output.setContent(replyContent(input.getContent()));
+        output.setCreateTime(System.currentTimeMillis() / 1000);
         output.setMsgType("text");
         return output;
     }
 
-    private String ReplyContent(String msg) {
-        if(msg.length()>2 && msg.substring(msg.length()-2).equals("天气")){
+    private String replyContent(String msg) {
+        int l = 2;
+        String t = "天气";
+        if(msg.length()> l && t.equals(msg.substring(msg.length()-2))){
             String address = msg.substring(0,msg.length()-2);
-            Map<String,String> map = new HashMap<>();
+            Map<String,String> map = new HashMap<>(12);
             log.info("传入的地址为: {}",address);
             map.put("address",address);
             map.put("ak", ApiConfig.BaiduAk);
             ResponseEntity<String> addressEntity = restTemplate.getForEntity(ApiUrl.ADDRESS_URL, String.class,map);
             JSONObject addressJson = JSONObject.parseObject(addressEntity.getBody());
-            if (addressJson.getInteger("status") != 0){
+            String code = "status";
+            if (addressJson.getInteger(code) != 0){
                 return "您输入的地址:["+address+"]我看不太懂呢,麻烦换下/:<L>";
             }
             JSONObject location = addressJson.getJSONObject("result").getJSONObject("location");
@@ -96,8 +99,6 @@ public class WxController {
             JSONObject nowWeather = Objects.requireNonNull(nowWeatherEntity.getBody()).getJSONObject("now");
             JSONObject todayWeather = threeDayWeather.get(0);
             //暂时不需要后两天的
-            //JSONObject tomorrowWeather = threeDayWeather.get(1);
-            //JSONObject tomorrowAfterWeather = threeDayWeather.get(2);
             StringBuilder content = new StringBuilder();
             if (todayWeather.getString("textDay").equals("晴")){
                 content.append("今天天气很晴朗🌞 冲鸭!\n");
@@ -126,8 +127,20 @@ public class WxController {
                 content.append("今天的天上有").append(todayWeather.getInteger("cloud")).append("%的☁️");
             return content.toString();
         }
-        ResponseEntity<String> loveTalkEntity = restTemplate.getForEntity(ApiUrl.LOVE_TALK, String.class);
-        return Objects.requireNonNull(loveTalkEntity.getBody());
+        ResponseEntity<String> loveTalkEntity;
+        String content;
+        try {
+            loveTalkEntity = restTemplate.getForEntity(ApiUrl.LOVE_TALK, String.class);
+            content = loveTalkEntity.getBody();
+        } catch (RestClientException e) {
+            log.error("timeout了");
+            loveTalkEntity = restTemplate.getForEntity(ApiUrl.LOVE_TALK, String.class);
+            content = loveTalkEntity.getBody();
+        }
+        if (content == null){
+            content = "我宁愿留在你方圆几里~~~";
+        }
+        return Objects.requireNonNull(content);
 }
 
 }

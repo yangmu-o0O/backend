@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -73,6 +75,15 @@ public class StaffController {
     }
 
     /**
+     * <h2>导入员工信息</h2>
+     * @param file 导入excel文件
+     */
+    @GetMapping("/import")
+    public void importStaff(MultipartFile file){
+        service.importStaff(file);
+    }
+
+    /**
      * <h2>获取图片验证码</h2>
      * @param response 返回图片响应
      * @param uuid 用于存放验证码的RedisKey
@@ -89,5 +100,10 @@ public class StaffController {
         try(ServletOutputStream out = response.getOutputStream()){
             ImageIO.write(image, "jpg", out);
         }
+    }
+
+    @PutMapping("/update_name/{no}")
+    public void updateName(@RequestParam String name,@PathVariable String no){
+        service.updateName(name,no);
     }
 }

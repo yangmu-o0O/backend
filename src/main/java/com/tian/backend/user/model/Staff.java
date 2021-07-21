@@ -1,13 +1,16 @@
 package com.tian.backend.user.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <h2>员工实体类</h2>
@@ -16,9 +19,8 @@ import java.time.LocalDateTime;
  * @date 2021/4/16 17:32
  */
 @Data
-@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName("staffs")
+@TableName(value = "staffs",autoResultMap = true)
 @JsonRootName("staff")
 public class Staff extends BaseModel {
 
@@ -52,4 +54,9 @@ public class Staff extends BaseModel {
      * 状态
      */
     private String state;
+    /**
+     *  文件
+     */
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private List<Map<String, Object>> files;
 }
