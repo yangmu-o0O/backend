@@ -18,27 +18,27 @@ public interface StaffService extends IService<Staff> {
     /**
      * <h2></h2>
      *
-     * @param creating a
-     * @return a
+     * @param creating 创建对象
+     * @return 创建对象
      */
     Staff create(Staff creating);
 
     /**
      * <h2></h2>
      *
-     * @param id       a
-     * @param updating a
-     * @return a
+     * @param id       员工ID
+     * @param updating 更新的属性
+     * @return 更新后的员工
      */
     Staff update(Long id, Staff updating);
 
     /**
      * <h2></h2>
      *
-     * @param pageRequest 1
-     * @param keywords    1
-     * @param state       1
-     * @return 1
+     * @param pageRequest 分页
+     * @param keywords    关键字
+     * @param state       状态
+     * @return 分页对象
      */
     Page<Staff> page(Page<Staff> pageRequest, String keywords, String state);
 

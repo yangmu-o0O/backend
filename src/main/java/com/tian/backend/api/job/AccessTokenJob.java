@@ -29,11 +29,14 @@ public class AccessTokenJob {
     @Resource
     private RestTemplate restTemplate;
 
-    //每30分钟执行一次 cron表达式
+    /**
+     * <h2>定时任务获取accessToken</h2>
+     * 每30分钟执行一次 cron表达式
+     */
     @Scheduled(cron = "0 */30 * * * ?")
     private void getAccessToken(){
         log.info("定时任务刷新accessToken开始 : {}", LocalDateTime.now());
-        Map<String,String> map = new HashMap<>();
+        Map<String,String> map = new HashMap<>(3);
         map.put("grant_type",ApiUrl.GRANT_TYPE);
         map.put("appid", ApiConfig.wxAppId);
         map.put("secret", ApiConfig.wxAppSecret);
